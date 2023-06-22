@@ -1,29 +1,33 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#ifndef ALL_STERN
+#define ALL_STERN	0
+#endif
 
 int main() {
-#define LIMIT	1000
-	int primes[LIMIT + 1];
-	for (int cnt = 0, pr = 0, curr = 2; cnt < LIMIT + 1; (curr += (curr % 2) ? 2 : 1) && (pr = 0)) {
-		for (int i = 0; i < cnt && !pr; pr = !(curr % primes[i++]));
-		if (!pr) primes[cnt++] = curr;
-	}
-	for (int i = 3, f = 0, pr = 0; i < primes[LIMIT]; (i += 2) && (pr = f = 0)) {
-		for (int j = 0; (j < LIMIT) && (i >= primes[j]); j++)
-			if (primes[j] == i)
-				pr = 1;
-		if (pr) continue;
-		for (int j = 0; (j < LIMIT) && (i >= primes[j]); j++) {
-			int sq = (i - primes[j]) / 2;
-			int rt = sqrt((double)sq);
-			if (rt * rt != sq) continue;
-//			printf("%d = %d + 2 * %d^2\n", i, primes[j], rt);
-			f = 1;
+#define LIMIT    1000000
+	uint64_t *primes = (uint64_t *)calloc(LIMIT + 1, sizeof(uint64_t));
+	primes[0] = 2;
+	primes[1] = 3;
+	for (uint64_t i = 2, pr = 0, f = 0, p_cnt = 1; p_cnt < LIMIT; (i += i % 2 ? 2 : 1) && (pr = f = 0)) {
+		for (uint64_t j = 0; j < p_cnt && !pr; pr = !(i % primes[j++]));
+		if (!pr) {
+			primes[p_cnt++] = i;
 		}
-		if (!f) {
-			printf("Answer = %d\n", i);
+		for (uint64_t j = 0; j < p_cnt; j++) {
+			uint64_t sq = (i - primes[j]) / 2;
+			uint64_t rt = sqrtl((long double)sq);
+			if ((ALL_STERN && !sq) || (rt * rt != sq)) continue;
+//			printf("%lu = %lu + 2 * %lu (%lu^2)\n", i, primes[j], sq, rt);
+			f = 1;
 			break;
 		}
+		if (!f)
+			printf("%lu\n", i);
 	}
+	free(primes);
 	return 0;
 }

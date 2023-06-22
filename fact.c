@@ -3,7 +3,7 @@
 
 int main() {
 	int sz = 1, res = 0, fact[200] = { 1 };
-	for (int i = 1, c = 0; i < 100; i++ && (c = 0)) {
+	for (int i = 1, c = 0; i < 100; i++) {
 		for (int j = 0, t = fact[0] * i + c; j < sz; t = fact[++j] * i + c) {
 			fact[j] = t % 10;
 			c = t / 10;
