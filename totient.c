@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <math.h>
 
 int g_max_num = 0;
 float g_max_tot = 0;
@@ -24,11 +25,12 @@ void sig_handler(int sig) {
 
 int gen_primes(int limit, int **primes) {
 	int p_cnt;
-	*primes = (int *)malloc(limit / 2 * sizeof(int));
+	int max_cnt = sqrt(limit);
+	*primes = (int *)malloc(max_cnt * sizeof(int));
 	(*primes)[0] = 2;
 	(*primes)[1] = 3;
 
-	for (int i = 3, p_cnt = 2; i < limit; i += 2) {
+	for (int i = 3, p_cnt = 2; p_cnt < max_cnt; i += 2) {
 		int pr = 0, f = 0;
 		for (int j = 0; j < p_cnt; j++) {
 			pr = !(i % (*primes)[j]);
