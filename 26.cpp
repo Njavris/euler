@@ -37,12 +37,12 @@ int main() {
 				string s1 = c.substr(0, d);
 				string s2 = c.substr(d, d);
 				if (s1.length() && s1 == s2 && d > l / 3) {
-					if (!it1 && !it2)
+					if (!it1 && !it2) {
 						it1 = s1.length();
-					else if (!it2)
+					} else if (!it2) {
 						it2 = s1.length();
-					else
 						break;
+					}
 				}
 			}
 			if (it1 && it2)
