@@ -6,6 +6,7 @@ using namespace std;
 int main() {
 	constexpr int limit = 10000;
 	int res = 0;
+
 	int closest = 1;
 	int next = (closest + 1) * (closest + 1);
 	for (int i = 2; i <= limit; i++) {

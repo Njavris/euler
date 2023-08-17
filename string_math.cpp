@@ -16,10 +16,15 @@ void str_add(string &n1, string &n2) {
 		d %= 10;
 		n1[idx] = d + '0';
 	}
-	if (r && idx < 0)
+	while (r && idx >= 0) {
+		int d = n1[idx] - '0' + r;
+		r = d / 10;
+		d %= 10;
+		n1[idx--] = d + '0';
+	}
+	if (r && idx < 0) {
 		n1.insert(begin(n1), '1');
-	else if (r)
-		n1[idx] += r;
+	}
 };
 
 void str_mul(string &n1, string &n2, string &ret) {
