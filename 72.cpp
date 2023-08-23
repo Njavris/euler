@@ -23,7 +23,6 @@ int main() {
 				for (phi -= phi / primes[j]; !(n % primes[j]); n /= primes[j]);
 		if (n > 1)
 			phi -= phi / n;
-		float tot = (float)i / phi;
 		num_els += phi;
 
 	}
