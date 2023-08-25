@@ -22,7 +22,7 @@ static int cache[100] = { 0 };
 	if (cache[n] > 0)
 		return cache[n];
 	int res = 0;
-	for (int k = 1; k * k <= n; k++) {
+	for (int k = 1; ((3 * k * k - k) / 2) <= n; k++) {
 		int n1 = n - k * (3 * k - 1) / 2;
 		int n2 = n - k * (3 * k + 1) / 2;
 		int pk = 0;
